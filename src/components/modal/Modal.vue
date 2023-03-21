@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mixin as clickAwayMixin } from 'vue-clickaway';
+import { mixin as clickAwayMixin } from 'vue3-click-away';
 import { MODAL_EVENTS } from '../../utils/constants';
 
 export default {

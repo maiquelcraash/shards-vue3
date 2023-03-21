@@ -5,7 +5,7 @@ const fs = require('fs')
 const glob = require('glob')
 const UglifyJS = require('uglify-js')
 const UglifyES = require('uglify-es')
-const PATHS = require('./paths')
+const PATHS = require('./paths.js')
 
 let Uglifier = UglifyJS
 

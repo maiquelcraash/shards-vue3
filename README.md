@@ -153,3 +153,8 @@ If you'd like to fix a bug or work on a feature, make sure to follow the steps b
 ### Changelog
 
 [View notable changes.](CHANGELOG.md)
+
+
+npm install --save-dev rollup rollup-plugin-buble rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-uglify rollup-plugin-vue
+
+npm uninstall --save-dev rollup rollup-plugin-buble rollup-plugin-commonjs rollup-plugin-node-resolve rollup-plugin-uglify rollup-plugin-vue

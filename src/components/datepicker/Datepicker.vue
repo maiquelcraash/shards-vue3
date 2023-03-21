@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import VueDatepicker from 'vuejs-datepicker'
+import VueDatepicker from 'vue3-datepicker'
 
 // Validator function that checks the date props.
 const _datePropValidator = (v) => {

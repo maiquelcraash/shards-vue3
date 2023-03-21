@@ -1,16 +1,17 @@
 'use strict'
 
-import path from 'path'
-import fs from 'fs'
-import { name, dependencies, version } from '../package.json'
+import path from 'path';
+import fs from 'fs';
+import cleanCSS from 'clean-css';
+import buble from 'rollup-plugin-buble';
+import vuePlugin from 'rollup-plugin-vue';
+import nodeResolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
+import PATHS from './paths.js';
 
-import cleanCSS from 'clean-css'
-import buble from 'rollup-plugin-buble'
-import vuePlugin from 'rollup-plugin-vue'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import commonjs from 'rollup-plugin-commonjs'
+const loadJSON = (path) => JSON.parse(fs.readFileSync(new URL(path, import.meta.url)));
+const { name, dependencies, version } = loadJSON('../package.json');
 
-const PATHS = require('./paths')
 
 const [major, minor] = process.versions.node.split('.').map(parseFloat)
 if (major < 7 || (major === 7 && minor <= 5)) {
@@ -20,7 +21,7 @@ if (major < 7 || (major === 7 && minor <= 5)) {
 
 // Converts strings into camelCase
 function camelize(str) {
-    return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+    return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
         if (+match === 0) {
             return ''
         }
@@ -34,10 +35,9 @@ const banner = `/*
 * Based on: Bootstrap ${dependencies.bootstrap} (https://getbootstrap.com)
 * Based on: Shards ${dependencies['shards-ui']} (https://designrevision.com/downloads/shards/)
 * Copyright 2017-${year} DesignRevision (https://designrevision.com)
-* Copyright 2017-${year} Catalin Vasile (http://catalin.me)
 */`
 
-module.exports = {
+export default {
     input: PATHS.INPUT,
     external: Object.keys(dependencies).filter(dep => {
         return ['popper.js', 'lodash.xor'].indexOf(dep) === -1
@@ -53,7 +53,8 @@ module.exports = {
                     path.resolve(PATHS.DIST + `${name}.css`),
                     new cleanCSS().minify(style).styles
                 )
-            }
+                console.log(style);
+            },
         }),
         nodeResolve({ external: ['vue'] }),
         commonjs(),

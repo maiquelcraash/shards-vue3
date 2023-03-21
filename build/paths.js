@@ -1,12 +1,15 @@
 'use strict'
 
-const path = require('path')
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const PATHS = Object.create(null)
+const Paths = Object.create(null);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-PATHS.BASE = path.resolve(__dirname, '..'),
-PATHS.SRC  = path.resolve(PATHS.BASE, 'src'),
-PATHS.DIST = path.resolve(PATHS.BASE, 'dist')
-PATHS.INPUT = path.resolve(PATHS.SRC, 'index.js')
+Paths.BASE = path.resolve(__dirname, '..');
+Paths.SRC  = path.resolve(Paths.BASE, 'src');
+Paths.DIST = path.resolve(Paths.BASE, 'dist');
+Paths.INPUT = path.resolve(Paths.SRC, 'index.js');
 
-module.exports = PATHS
+export default Paths;
