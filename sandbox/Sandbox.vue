@@ -1,8 +1,4 @@
-<template>
-    <d-button @click="handleClick">Click me!</d-button>
-</template>
-
-<script>
+<script setup>
 /**
  * 🙌 Awesome, so you'd like to contribute!
  *
@@ -13,33 +9,24 @@
  * Check out the comments below to understand what's going on!
  */
 
-// First we're importing Vue
-// eslint-disable-next-line
-import Vue from 'vue'
+// Configure Vue3 instance and attach shards-vue3 lib to it
+import './src/main.js'
 
-// We're also importing Bootstrap's and Shards' styles
-import 'bootstrap/dist/css/bootstrap.css'
-import 'shards-ui/dist/css/shards.css'
 
-// We're importing one of Shards Vue's components and registering it as a Vue Plugin
-// eslint-disable-next-line
-import { Button } from '../src/components'
+// You Import the component directly as SFC.
+import Button from '../src/components/button/Button.vue'
 
-// Uncomment this line in case you'd like to use the component as a plugin
-// Vue.use(Button)
-
-// ALTERNATIVE: Import the component directly.
-import dButton from '../src/components/button/Button'
-
-// We define our custom component's logic.
-export default {
-    components: {
-        dButton
-    },
-    methods: {
-        handleClick() {
-            alert('You just clicked me!')
-        }
-    }
+function handleClick() {
+    window.alert('You clicked');
 }
 </script>
+
+<template>
+    <!-- Plugin component -->
+    <d-badge theme="secondary">I'm a plugin component</d-badge>
+
+    <br>
+
+    <!-- Imported Single File Component -->
+    <Button theme="danger" @click="handleClick">Click me! I'm an inported component</Button>
+</template>
