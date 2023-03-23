@@ -106,6 +106,7 @@ export default {
         minimize: true,
         minimizer: [
             new TerserPlugin({
+                test: /\.min.$/,
                 extractComments: false,
             }),
         ],

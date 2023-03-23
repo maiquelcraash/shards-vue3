@@ -58,17 +58,6 @@
     "Tag",
     "Tooltip"
   ],
-  "bundlesize": [
-    {
-      "path": "./dist/shards-vue3.common.min.js"
-    },
-    {
-      "path": "./dist/shards-vue3.esm.min.js"
-    },
-    {
-      "path": "./dist/shards-vue3.umd.min.js"
-    }
-  ],
   "dependencies": {
     "@vue/compat": "^3.2.47",
     "bootstrap": "^4.6.2",

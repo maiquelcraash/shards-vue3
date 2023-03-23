@@ -31,14 +31,18 @@ However this package contains a lot of improvements such as:
 
 ### Quick Start
 
-You can install Shards Vue via Yarn or NPM.
+You can install Shards Vue 3 including the following dependency to your `package.json`
 
+```js
+"shards-vue3": "git+git@github.com:maiquelcraash/shards-vue3.git#master"
+```
+Then, just update your modules with
 ```bash
-// Install via Yarn
-yarn add shards-vue
+// If using NPM
+npm install
 
-// Install via NPM
-npm i shards-vue
+// If using Yarn
+yarn
 ```
 
 <br />
@@ -49,7 +53,7 @@ If you are using a module bundler such as [Webpack](https://webpack.js.org/) or 
 
 ```javascript
 import { createApp } from 'vue'
-import ShardsVue from 'shards-vue'
+import ShardsVue from 'shards-vue3'
 
 // Import base styles (Bootstrap and Shards)
 import 'bootstrap/dist/css/bootstrap.css'
@@ -73,7 +77,7 @@ import { createApp } from 'vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'shards-ui/dist/css/shards.css'
 
-import { Button } from 'shards-vue/src/components'
+import { Button } from 'shards-vue3/src/components'
 const app = createApp({ });
 app.use(Button);
 app.mount('#app')
