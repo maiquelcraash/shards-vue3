@@ -1,4 +1,5 @@
 import { isArray } from '../utils';
+import eventbus from '../utils/eventbus.js';
 
 const _DR_RL_ = '_DR_RL_';
 
@@ -10,12 +11,12 @@ export default {
             }
 
             this[_DR_RL_].push({ event, callback })
-            this.$root.$on(event, callback)
+            eventbus.$on(event, callback)
 
             return this
         },
         emitOnRoot(event, ...args) {
-            this.$root.$emit(event, ...args)
+            eventbus.$emit(event, ...args)
             return this
         }
     },
@@ -26,7 +27,7 @@ export default {
 
         while (this[_DR_RL_].length > 0) {
             const { event, callback } = this[_DR_RL_].shift()
-            this.$root.$off(event, callback)
+            eventbus.$off(event, callback)
         }
     }
 }
