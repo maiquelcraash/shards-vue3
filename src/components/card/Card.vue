@@ -1,7 +1,6 @@
 <template>
     <component :is="tag"
         v-bind="$attrs"
-        v-on="$listeners"
         :class="[
             'card',
             Boolean(align) ? `text-${align}` : '',

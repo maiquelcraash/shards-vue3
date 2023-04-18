@@ -28,7 +28,7 @@
         :use-utc="useUtc"
         :minimum-view="minimumView"
         :maximum-view="maximumView"
-        v-on="$listeners">
+        v-bind="$attrs">
             <slot name="beforeCalendarHeader" slot="beforeCalendarHeader" />
             <slot name="afterDateInput" slot="afterDateInput" />
     </VueDatepicker>

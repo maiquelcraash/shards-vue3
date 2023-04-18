@@ -1,7 +1,6 @@
 <template>
     <form :novalidate="novalidate ? true : false"
         v-bind="$attrs"
-        v-on="$listeners"
         :class="[
             inline ? 'form-inline' : '',
             validated ? 'was-validated' : ''
