@@ -65,6 +65,7 @@
     "nouislider": "^11.1.0",
     "popper.js": "^1.14.4",
     "shards-ui": "^3.0.0",
+    "tiny-emitter": "^2.1.0",
     "vue": "^3.2.47",
     "vue3-click-away": "^1.2.4",
     "vue3-datepicker": "^0.3.4"
