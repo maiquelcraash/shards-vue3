@@ -1,34 +1,34 @@
 <template>
     <component :is="tag"
-        :id="computedID"
-        :class="computedTabsClasses">
+               :id="computedID"
+               :class="computedTabsClasses">
 
         <div :class="computedNavListWrapperClasses">
             <ul :class="computedNavListClasses"
-            role="tablist"
-            tabindex='0'
-            :id="computedTabControlsID"
-            @keydown="handleOnKeynav">
+                role="tablist"
+                tabindex='0'
+                :id="computedTabControlsID"
+                @keydown="handleOnKeynav">
                 <d-tab-button v-for="(tab, index) in tabs" :key="index"
-                    :content="tab.headHtml || tab.title"
-                    :href="tab.href"
-                    :id="computedTabButtonID"
-                    :active="tab.localActiveState"
-                    :disabled="tab.disabled"
-                    :setSize="tabs.length"
-                    :posInSet="index + 1"
-                    :controls="_tabsContainerID"
-                    :linkClass="tab.titleLinkClass"
-                    :itemClass="tab.titleItemClass"
-                    @click="setTab(index)" />
-                <slot name="tabs" />
+                              :content="tab.headHtml || tab.title"
+                              :href="tab.href"
+                              :id="computedTabButtonID"
+                              :active="tab.localActiveState"
+                              :disabled="tab.disabled"
+                              :setSize="tabs.length"
+                              :posInSet="index + 1"
+                              :controls="_tabsContainerID"
+                              :linkClass="tab.titleLinkClass"
+                              :itemClass="tab.titleItemClass"
+                              @click="setTab(index)"/>
+                <slot name="tabs"/>
             </ul>
         </div>
 
         <div ref="tabsContainer"
-            :class="computedTabsContainerClasses"
-            :id="_tabsContainerID">
-            <slot />
+             :class="computedTabsContainerClasses"
+             :id="_tabsContainerID">
+            <slot/>
         </div>
     </component>
 </template>
@@ -37,6 +37,9 @@
 import { guid } from '../../utils'
 import { KEYCODES } from '../../utils/constants'
 import dTabButton from './_TabButton.vue'
+import { ref } from 'vue'
+
+const childComponent = ref();
 
 export default {
     name: 'd-tabs',
@@ -52,7 +55,7 @@ export default {
         }
     },
     watch: {
-        currentTab (newVal, oldVal) {
+        currentTab(newVal, oldVal) {
             if (newVal === oldVal) {
                 return
             }
@@ -60,7 +63,7 @@ export default {
             this.$emit('input', newVal)
             this.tabs[newVal].$emit('click')
         },
-        value (newVal, oldVal) {
+        value(newVal, oldVal) {
             if (newVal === oldVal) {
                 return
             }
@@ -197,7 +200,7 @@ export default {
                 e.stopPropagation()
             }
 
-            if (e.keyCode === KEYCODES.UP || e.keyCode === KEYCODES.LEFT ) {
+            if (e.keyCode === KEYCODES.UP || e.keyCode === KEYCODES.LEFT) {
                 this.previousTab()
             }
 
@@ -237,18 +240,22 @@ export default {
             }
 
             this.tabs.forEach(_tab => {
+                console.log(_tab);
                 if (_tab === tab) {
-                    this.$set(_tab, 'localActiveState', true)
+                    _tab['localActiveState'] = true
                     return
                 }
 
-                this.$set(_tab, 'localActiveState', false)
+                _tab['localActiveState'] = false
             })
 
             this.currentTab = index
         },
         updateTabs() {
-            this.tabs = this.$children.filter(child => child._isTab)
+            this.tabs = Array.from(this.$refs.tabsContainer.querySelectorAll('.tab-pane')).map((tabEl) => {
+                return tabEl.__vnode.ctx.ctx
+            }).filter(child => child._isTab);
+
             let tabIndex = null
 
             this.tabs.forEach((tab, index) => {
