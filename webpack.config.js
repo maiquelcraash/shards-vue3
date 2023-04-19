@@ -2,7 +2,7 @@ import { VueLoaderPlugin } from 'vue-loader';
 import TerserPlugin from 'terser-webpack-plugin';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {default as packageJSON} from './package.json' assert { type: "json" };
+import { default as packageJSON } from './package.json' assert { type: 'json' };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,29 +18,16 @@ const externals = Object.keys(dependencies).filter(dep => {
 });
 
 export default {
-    mode: 'none',
+    mode: 'production',
     devtool: 'source-map',
     experiments: {
         outputModule: true,
     },
     entry: {
-        'esm': {
-            import: PATHS.INPUT,
-            library: {
-                type: 'module',
-            },
-        },
         'esm.min': {
             import: PATHS.INPUT,
             library: {
                 type: 'module',
-            },
-        },
-        'umd': {
-            import: PATHS.INPUT,
-            library: {
-                name: 'ShardVue3',
-                type: 'var'
             },
         },
         'umd.min': {
@@ -48,12 +35,6 @@ export default {
             library: {
                 name: 'ShardVue3',
                 type: 'var'
-            },
-        },
-        'common': {
-            import: PATHS.INPUT,
-            library: {
-                type: 'commonjs2'
             },
         },
         'common.min': {
@@ -106,7 +87,6 @@ export default {
         minimize: true,
         minimizer: [
             new TerserPlugin({
-                test: /\.min.$/,
                 extractComments: false,
             }),
         ],
