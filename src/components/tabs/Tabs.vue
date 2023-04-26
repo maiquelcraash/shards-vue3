@@ -43,12 +43,13 @@ const childComponent = ref();
 
 export default {
     name: 'd-tabs',
+    emits: ['update:modelValue'],
     components: {
         dTabButton
     },
     data() {
         return {
-            currentTab: this.value,
+            currentTab: this.modelValue,
             tabs: [],
             // eslint-disable-next-line
             _tabsContainerID: null
@@ -60,7 +61,7 @@ export default {
                 return
             }
 
-            this.$emit('input', newVal)
+            this.$emit('update:modelValue', newVal)
             this.tabs[newVal].$emit('click')
         },
         value(newVal, oldVal) {
@@ -101,7 +102,7 @@ export default {
         /**
          * The value used to set the current tab.
          */
-        value: {
+        modelValue: {
             type: Number,
             default: null
         },
@@ -227,7 +228,7 @@ export default {
             const tab = this.tabs[index]
 
             if (!tab) {
-                this.$emit('input', this.currentTab)
+                this.$emit('update:modelValue', this.currentTab)
                 return
             }
 

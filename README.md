@@ -113,6 +113,11 @@ export default {
 
 <br />
 
+### Breaking Changes v2 to v3
+ - `v-model` on child components https://v3-migration.vuejs.org/breaking-changes/v-model.html
+
+<br />
+
 ### Build
 
 ```

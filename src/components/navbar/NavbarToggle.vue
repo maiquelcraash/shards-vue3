@@ -13,6 +13,7 @@
 <script>
 import rootListenerMixin from '../../mixins/root-listener.mixin'
 import { COLLAPSE_EVENTS } from '../../utils/constants';
+import eventbus from '../../utils/eventbus.js';
 
 export default {
     name: 'd-navbar-toggle',
@@ -40,7 +41,7 @@ export default {
     },
     methods: {
         onClick() {
-            this.$root.$emit(COLLAPSE_EVENTS.TOGGLE, this.target)
+            eventbus.$emit(COLLAPSE_EVENTS.TOGGLE, this.target)
         },
         handleStateEvent(id, state) {
             if (id === this.target) {

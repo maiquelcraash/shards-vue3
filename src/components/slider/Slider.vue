@@ -1,5 +1,5 @@
 <template>
-    <div class="shards-custom-slider" ref="slider" :id="computedID" />
+    <div class="shards-custom-slider" ref="slider" :id="computedID"/>
 </template>
 
 <script>
@@ -8,6 +8,7 @@ import { guid } from '../../utils'
 
 export default {
     name: 'd-slider',
+    emits: ['update:modelValue'],
     props: {
         /**
          * The element ID.
@@ -28,7 +29,7 @@ export default {
         /**
          * Slider value.
          */
-        value: {
+        modelValue: {
             type: [String, Array, Number],
             required: true
         },
@@ -67,7 +68,7 @@ export default {
                 if (Array.isArray(sliderValue) && Array.isArray(newVal)) {
                     if (
                         oldVal.length === newVal.length &&
-                        oldVal.every((v, i) => v === newVal[i] )
+                        oldVal.every((v, i) => v === newVal[i])
                     ) {
                         sliderInstance.set(newVal)
                     }
@@ -84,7 +85,7 @@ export default {
     },
     mounted() {
         const config = {
-            start: this.value || this.start,
+            start: this.modelValue || this.start,
             connect: this.connect,
             range: this.range,
             ...this.options
@@ -94,8 +95,8 @@ export default {
 
         this.$el.noUiSlider.on('slide', () => {
             const value = this.$el.noUiSlider.get()
-            if (value !== this.value) {
-                this.$emit('input', value)
+            if (value !== this.modelValue) {
+                this.$emit('update:modelValue', value)
             }
         })
     }

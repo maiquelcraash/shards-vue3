@@ -10,7 +10,7 @@
         :autocomplete="autocomplete"
         :aria-required="required ? true : null"
         :aria-invalid="computedAriaInvalid"
-        :value="value"
+        :value="modelValue"
         :class="[
             plaintext ? 'form-control-plaintext' : 'form-control',
             plaintext ? 'w-100' : '',
@@ -28,6 +28,7 @@ import { INPUT_TYPES } from './../../utils/constants'
 
 export default {
     name: 'd-form-input',
+    emits: ['update:modelValue', 'change'],
     props: {
         /**
          * Input type.
@@ -40,7 +41,7 @@ export default {
         /**
          * Input value.
          */
-        value: {
+        modelValue: {
             type: [String, Number],
             default: ''
         },
@@ -116,13 +117,14 @@ export default {
         }
     },
     watch: {
-        value (newVal) {
+        modelValue (newVal) {
+            console.log(newVal);
             this.setValue(newVal)
         }
     },
     mounted() {
-        if (this.value) {
-            this.setValue(this.value)
+        if (this.modelValue) {
+            this.setValue(this.modelValue)
         }
     },
     computed: {
@@ -162,7 +164,8 @@ export default {
     methods: {
         setValue(value) {
             this.$refs.input.value = value
-            this.$emit('input', value)
+            this.$emit('update:modelValue', value)
+            console.log('update:modelValue', value);
         },
         onInput(e) {
             this.setValue(e.target.value)

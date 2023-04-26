@@ -1,20 +1,20 @@
 <template>
     <transition :enterActiveClass="'collapsing'"
-        :leaveActiveClass="'collapsing'"
-        @enter="onEnter"
-        @afterEnter="onAfterEnter"
-        @leave="onLeave"
-        @afterLeave="onAfterLeave" >
+                :leaveActiveClass="'collapsing'"
+                @enter="onEnter"
+                @afterEnter="onAfterEnter"
+                @leave="onLeave"
+                @afterLeave="onAfterLeave">
         <component :is="tag"
-            v-show="show"
-            :class="[
+                   v-show="show"
+                   :class="[
                 isNav ? 'navbar-collapse' : '',
                 !transitioning ? 'collapse' : '',
                 show && !transitioning ? 'show' : ''
             ]"
-            :id="[ id ? id : '' ]"
-            @click="handleClick">
-            <slot />
+                   :id="[ id ? id : '' ]"
+                   @click="handleClick">
+            <slot/>
         </component>
     </transition>
 </template>
@@ -23,10 +23,12 @@
 import { hasClass, isElement } from '../../utils'
 import { COLLAPSE_EVENTS } from '../../utils/constants'
 import rootListenerMixin from '../../mixins/root-listener.mixin'
+import eventbus from '../../utils/eventbus.js';
 
 export default {
     name: 'd-collapse',
-    mixins: [ rootListenerMixin ],
+    emits: ['show', 'shown', 'hide', 'hidden', 'update:visible'],
+    mixins: [rootListenerMixin],
     props: {
         /**
          * The component ID.
@@ -64,10 +66,6 @@ export default {
             default: null
         }
     },
-    model: {
-        prop: 'visible',
-        event: 'input'
-    },
     watch: {
         visible(newVal) {
             if (newVal !== this.show) {
@@ -91,8 +89,8 @@ export default {
             this.show = !this.show
         },
         emitStateChange() {
-            this.$emit('input', this.show)
-            this.$root.$emit('state', this.id, this.show)
+            this.$emit('update:visible', 0)
+            eventbus.$emit('state', this.id, this.show)
 
             if (this.accordion && this.show) {
                 /**
@@ -100,7 +98,7 @@ export default {
                  *
                  * @event accordion-collapse
                  */
-                this.$root.$emit(COLLAPSE_EVENTS.ACCORDION, this.id, this.accordion)
+                eventbus.$emit(COLLAPSE_EVENTS.ACCORDION, this.id, this.accordion)
             }
 
         },
@@ -127,11 +125,11 @@ export default {
             }
 
             if (id === this.id) {
-                if(!this.show) {
+                if (!this.show) {
                     this.toggle()
                 }
             } else {
-                if(this.show) {
+                if (this.show) {
                     this.toggle()
                 }
             }

@@ -6,20 +6,20 @@
         computedStateClass
     ]">
         <input type="radio"
-            ref="check"
-            autocomplete="off"
-            :aria-required="required ? 'true' : null"
-            :id="computedID"
-            :class="[ 'custom-control-input', computedStateClass ]"
-            :name="name"
-            :value="value"
-            :disabled="disabled"
-            :required="name && required"
-            v-model="computedLocalChecked"
-            @change="handleChange" />
+               ref="check"
+               autocomplete="off"
+               :aria-required="required ? 'true' : null"
+               :id="computedID"
+               :class="[ 'custom-control-input', computedStateClass ]"
+               :name="name"
+               :value="modelValue"
+               :disabled="disabled"
+               :required="name && required"
+               v-model="computedLocalChecked"
+               @change="handleChange"/>
         <label :for="computedID" class="custom-control-label" aria-hidden="true"></label>
         <span :class="['custom-control-description']">
-            <slot />
+            <slot/>
         </span>
     </label>
 </template>
@@ -29,6 +29,7 @@ import { guid } from '../../utils'
 
 export default {
     name: 'd-form-radio',
+    emits: ['update:modelValue', 'change'],
     model: {
         prop: 'checked',
         event: 'input'
@@ -55,7 +56,7 @@ export default {
         /**
          * The radio input value.
          */
-        value: {
+        modelValue: {
             default: true
         },
         /**
@@ -134,7 +135,7 @@ export default {
                 return
             }
 
-            this.$emit('input', newVal)
+            this.$emit('update:modelValue', newVal)
         },
 
         checked(newVal, oldVal) {
@@ -148,7 +149,7 @@ export default {
 
     methods: {
         handleChange(e) {
-            this.$emit('change', e.target.checked ? this.value : null)
+            this.$emit('change', e.target.checked ? this.modelValue : null)
         }
     }
 }

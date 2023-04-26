@@ -31,6 +31,7 @@ import { guid } from '../../utils'
 
 export default {
     name: 'd-form-select',
+    emits: ['change', 'update:modelValue'],
     props: {
         /**
          * The element ID.
@@ -57,7 +58,7 @@ export default {
         /**
          * The select value.
          */
-        value: {},
+        modelValue: {},
         /**
          * Whether it should allow multiple selections, or not.
          */
@@ -133,7 +134,7 @@ export default {
     },
     data() {
         return {
-            localValue: this.value
+            localValue: this.modelValue
         }
     },
     watch: {
@@ -142,7 +143,7 @@ export default {
         },
 
         localValue() {
-            this.$emit('input', this.localValue)
+            this.$emit('update:modelValue', this.localValue)
         }
     },
     computed: {

@@ -7,22 +7,22 @@
             computedStateClass
         ]">
         <input type="checkbox"
-            ref="check"
-            autocomplete="off"
-            :aria-required="required ? 'true' : null"
-            :id="computedID"
-            :class="[ 'custom-control-input', computedStateClass ]"
-            :name="name"
-            :value="value"
-            :true-value="value"
-            :false-value="uncheckedValue"
-            :disabled="disabled"
-            :required="required"
-            v-model="computedLocalState"
-            @change="handleChange" />
+               ref="check"
+               autocomplete="off"
+               :aria-required="required ? 'true' : null"
+               :id="computedID"
+               :class="[ 'custom-control-input', computedStateClass ]"
+               :name="name"
+               :value="modelValue"
+               :true-value="modelValue"
+               :false-value="uncheckedValue"
+               :disabled="disabled"
+               :required="required"
+               v-model="computedLocalState"
+               @change="handleChange"/>
         <label :for="computedID" class="custom-control-label" aria-hidden="true"></label>
         <span :class="['custom-control-description']">
-            <slot />
+            <slot/>
         </span>
     </label>
 </template>
@@ -32,6 +32,7 @@ import { guid } from '../../utils'
 
 export default {
     name: 'd-form-checkbox',
+    emits: ['update:modelValue', 'update:indeterminate', 'change'],
     model: {
         prop: 'checked',
         event: 'input'
@@ -58,7 +59,7 @@ export default {
         /**
          * The checkbox input value.
          */
-        value: {
+        modelValue: {
             default: true
         },
         /**
@@ -164,7 +165,7 @@ export default {
                 return
             }
 
-            this.$emit('input', newVal)
+            this.$emit('update:modelValue', newVal)
             this.$emit('update:indeterminate', this.$refs.check.indeterminate)
         },
 
@@ -183,7 +184,7 @@ export default {
 
     methods: {
         handleChange(e) {
-            this.$emit('change', e.target.checked ? this.value : this.uncheckedValue)
+            this.$emit('change', e.target.checked ? this.modelValue : this.uncheckedValue)
             this.$emit('update:indeterminate', this.$refs.check.indeterminate)
         },
 

@@ -2,6 +2,7 @@ import Popper from 'popper.js'
 import { CancelableEvent } from './events'
 import { TP_STATE_CLASSES, TP_OFFSET_MAP, N_TP_PLACEMENTS, TOOLTIP_SELECTORS, TOOLTIP_HOVER_STATE_CLASSES, MODAL_EVENTS } from './constants'
 import { getAttr, setAttr, removeAttr, guid, hasClass, addClass, removeClass, isDisabled, selectElement, isVisible, closest, getComputedStyles } from './index'
+import eventbus from './eventbus.js';
 
 const Defaults = {
     animation: true,
@@ -676,8 +677,8 @@ export default class TPManager {
     _emitCustomEvent(event) {
         const eventName = event.type
 
-        if (this._$root && this._$root.$emit) {
-            this._$root.$emit(`dr:${this.constructor.Name}:${eventName}`, event)
+        if (this._$root) {
+            eventbus.$emit(`dr:${this.constructor.Name}:${eventName}`, event)
         }
 
         const callbacks = this._config.callbacks || {}

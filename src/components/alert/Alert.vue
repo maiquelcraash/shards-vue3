@@ -22,6 +22,7 @@ import dButtonClose from '../button/ButtonClose.vue';
 
 export default {
     name: 'd-alert',
+    emits: ['update:show'],
     components: {
         dButtonClose
     },
@@ -55,10 +56,6 @@ export default {
             type: [Boolean, Number, String],
             default: false
         }
-    },
-    model: {
-        prop: 'show',
-        event: 'input'
     },
     data() {
         return {
@@ -101,10 +98,10 @@ export default {
              * @type {Boolean}
              */
             this.$emit(ALERT_EVENTS.DISMISSED);
-            this.$emit('input', false);
+            this.$emit('update:show', false)
 
             if (typeof this.show === 'boolean') {
-                this.$emit('input', false);
+                this.$emit('update:show', false)
                 return;
             }
 
@@ -115,7 +112,7 @@ export default {
              * @type {Number}
              */
             this.$emit(ALERT_EVENTS.DISMISS_COUNTDOWN, 0);
-            this.$emit('input', 0);
+            this.$emit('update:show', 0)
         },
 
         showChanged() {
@@ -141,7 +138,7 @@ export default {
                  * @type {Number}
                  */
                 this.$emit(ALERT_EVENTS.DISMISS_COUNTDOWN, dismissTimer);
-                this.$emit('input', dismissTimer);
+                this.$emit('update:show', dismissTimer)
             }, 1000);
         }
     }

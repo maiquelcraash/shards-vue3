@@ -23,6 +23,7 @@
 <script>
 import { mixin as clickAwayMixin } from 'vue3-click-away';
 import { MODAL_EVENTS } from '../../utils/constants';
+import eventbus from '../../utils/eventbus.js';
 
 export default {
     name: 'd-modal',
@@ -76,7 +77,7 @@ export default {
          *
          * Triggered when the modal is hidden.
          */
-        this.$root.$emit(MODAL_EVENTS.HIDDEN)
+        eventbus.$emit(MODAL_EVENTS.HIDDEN)
     }
   },
 };

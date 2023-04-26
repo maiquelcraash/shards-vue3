@@ -1,4 +1,5 @@
 import target from '../../utils/target'
+import eventbus from '../../utils/eventbus.js';
 import { COLLAPSE_EVENTS } from '../../utils/constants'
 import { setAttr, addClass, removeClass } from '../../utils'
 
@@ -8,7 +9,7 @@ const DR_TOGGLE = '__DRTOGGLE'
 export default {
     bind(element, binding, vnode) {
         const targets = target(vnode, binding, { click: true }, ({ targets, vnode }) => {
-            targets.forEach(target => vnode.context.$root.$emit(COLLAPSE_EVENTS.TOGGLE, target));
+            targets.forEach(target => eventbus.$emit(COLLAPSE_EVENTS.TOGGLE, target));
         });
 
         if (inBrowser && vnode.context && targets.length > 0) {
@@ -31,7 +32,7 @@ export default {
                     addClass(element, 'collapsed');
                 }
             }
-            vnode.context.$root.$on(COLLAPSE_EVENTS.STATE, element[DR_TOGGLE])
+            eventbus.$on(COLLAPSE_EVENTS.STATE, element[DR_TOGGLE])
         }
     },
     unbind(element, binding, vnode) {
@@ -39,7 +40,7 @@ export default {
             return
         }
 
-        vnode.context.$root.$off(COLLAPSE_EVENTS.STATE, element[DR_TOGGLE])
+        eventbus.$off(COLLAPSE_EVENTS.STATE, element[DR_TOGGLE])
         element[DR_TOGGLE] = null
     }
 }
