@@ -241,7 +241,6 @@ export default {
             }
 
             this.tabs.forEach(_tab => {
-                console.log(_tab);
                 if (_tab === tab) {
                     _tab['localActiveState'] = true
                     return

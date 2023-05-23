@@ -118,7 +118,6 @@ export default {
     },
     watch: {
         modelValue (newVal) {
-            console.log(newVal);
             this.setValue(newVal)
         }
     },
@@ -165,7 +164,6 @@ export default {
         setValue(value) {
             this.$refs.input.value = value
             this.$emit('update:modelValue', value)
-            console.log('update:modelValue', value);
         },
         onInput(e) {
             this.setValue(e.target.value)
