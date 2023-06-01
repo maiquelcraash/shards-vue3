@@ -13,9 +13,7 @@
                :id="computedID"
                :class="[ 'custom-control-input', computedStateClass ]"
                :name="name"
-               :value="modelValue"
-               :true-value="modelValue"
-               :false-value="uncheckedValue"
+               :value="value"
                :disabled="disabled"
                :required="required"
                v-model="computedLocalState"
@@ -33,13 +31,9 @@ import { guid } from '../../utils'
 export default {
     name: 'd-form-checkbox',
     emits: ['update:modelValue', 'update:indeterminate', 'change'],
-    model: {
-        prop: 'checked',
-        event: 'input'
-    },
     data() {
         return {
-            localState: this.checked
+            localState: this.modelValue
         }
     },
     props: {
@@ -59,7 +53,7 @@ export default {
         /**
          * The checkbox input value.
          */
-        modelValue: {
+        value: {
             default: true
         },
         /**
@@ -84,7 +78,7 @@ export default {
         /**
          * The checked state.
          */
-        checked: {
+        modelValue: {
             type: [Boolean, String, Array]
         },
         /**
@@ -161,7 +155,7 @@ export default {
     },
     watch: {
         computedLocalState(newVal, oldVal) {
-            if (newVal == oldVal) {
+            if (newVal === oldVal) {
                 return
             }
 
@@ -169,8 +163,8 @@ export default {
             this.$emit('update:indeterminate', this.$refs.check.indeterminate)
         },
 
-        checked(newVal, oldVal) {
-            if (newVal == oldVal) {
+        modelValue(newVal, oldVal) {
+            if (newVal === oldVal) {
                 return
             }
 
@@ -183,7 +177,7 @@ export default {
     },
 
     methods: {
-        handleChange(e) {
+        computedLocalState(e) {
             this.$emit('change', e.target.checked ? this.modelValue : this.uncheckedValue)
             this.$emit('update:indeterminate', this.$refs.check.indeterminate)
         },

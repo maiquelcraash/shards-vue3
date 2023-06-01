@@ -12,7 +12,7 @@
                :id="computedID"
                :class="[ 'custom-control-input', computedStateClass ]"
                :name="name"
-               :value="modelValue"
+               :value="value"
                :disabled="disabled"
                :required="name && required"
                v-model="computedLocalChecked"
@@ -25,18 +25,14 @@
 </template>
 
 <script>
-import { guid } from '../../utils'
+import {guid} from '../../utils'
 
 export default {
     name: 'd-form-radio',
     emits: ['update:modelValue', 'change'],
-    model: {
-        prop: 'checked',
-        event: 'input'
-    },
     data() {
         return {
-            localChecked: this.checked
+            localChecked: this.modelValue
         }
     },
     props: {
@@ -53,10 +49,11 @@ export default {
             type: String,
             default: null
         },
+
         /**
          * The radio input value.
          */
-        modelValue: {
+        value: {
             default: true
         },
         /**
@@ -75,7 +72,7 @@ export default {
         /**
          * The checked state.
          */
-        checked: {
+        modelValue: {
             type: [Boolean, String, Array]
         },
         /**
@@ -131,15 +128,15 @@ export default {
     },
     watch: {
         computedLocalChecked(newVal, oldVal) {
-            if (newVal == oldVal) {
+            if (newVal === oldVal) {
                 return
             }
 
             this.$emit('update:modelValue', newVal)
         },
 
-        checked(newVal, oldVal) {
-            if (newVal == oldVal) {
+        modelValue(newVal, oldVal) {
+            if (newVal === oldVal) {
                 return
             }
 

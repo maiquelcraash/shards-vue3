@@ -12,21 +12,57 @@
 // Configure Vue3 instance and attach shards-vue3 lib to it
 import './src/main.js'
 
-
-// You Import the component directly as SFC.
+// You can import the component directly as SFC.
+import DFormRadio from '@/components/form-radio/FormRadio.vue';
 import Button from '../src/components/button/Button.vue'
 
 function handleClick() {
-    window.alert('You clicked');
+  window.alert('You clicked');
+}
+
+</script>
+
+<script>
+export default {
+  data() {
+    return {
+      checked: false,
+      selected: 'orange'
+    }
+  },
+  watch: {
+    checked(newVal, oldVal) {
+      console.log('Checkbox changed to', newVal);
+    },
+  }
 }
 </script>
 
 <template>
-    <!-- Plugin component -->
-    <d-badge theme="secondary">I'm a plugin component</d-badge>
+  <!-- Plugin component -->
+  <d-badge theme="secondary">I'm a plugin component</d-badge>
 
-    <br>
+  <br>
 
-    <!-- Imported Single File Component -->
-    <Button theme="danger" @click="handleClick">Click me! I'm an inported component</Button>
+  <!-- Imported Single File Component -->
+  <Button theme="danger" @click="handleClick">Click me! I'm an inported component</Button>
+
+  <!-- Component 2-way data binding -->
+  <d-checkbox v-model="checked"
+              class="custom-toggle-sm mt-4"
+              toggle>
+    {{ checked }}
+  </d-checkbox>
+
+  <d-form-radio v-model="selected" value="orange">Orange</d-form-radio>
+  <d-form-radio v-model="selected" value="lemon">Lemon</d-form-radio>
+  <d-form-radio v-model="selected" value="kiwi">Kiwi</d-form-radio>
+  <p>Selected Status: {{ selected }}</p>
+
 </template>
+
+<style lang="css">
+  body {
+    padding: 5px;
+  }
+</style>
