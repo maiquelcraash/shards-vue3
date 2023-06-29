@@ -103,7 +103,7 @@ function applyTooltip(el, bindings, vnode) {
     const parsedBindings = parseBindings(bindings)
 
     if (!el[KEY]) {
-        el[KEY] = new Tooltip(el, parsedBindings, vnode.context.$root)
+        el[KEY] = new Tooltip(el, parsedBindings, bindings.instance)
         return
     }
 
@@ -111,27 +111,21 @@ function applyTooltip(el, bindings, vnode) {
 }
 
 export default {
-    bind (el, bindings, vnode) {
+    beforeMount (el, bindings, vnode) {
         applyTooltip(el, bindings, vnode)
     },
 
-    inserted(el, bindings, vnode) {
+    mounted(el, bindings, vnode) {
         applyTooltip(el, bindings, vnode)
     },
 
-    update (el, bindings, vnode) {
+    updated (el, bindings, vnode) {
         if (bindings.value !== bindings.oldValue) {
             applyTooltip(el, bindings, vnode)
         }
     },
 
-    componentUpdated (el, bindings, vnode) {
-        if (bindings.value !== bindings.oldValue) {
-            applyTooltip(el, bindings, vnode)
-        }
-    },
-
-    unbind (el) {
+    unmounted (el) {
         if (!inBrowser) {
             return
         }

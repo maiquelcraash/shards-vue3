@@ -7,7 +7,7 @@ const inBrowser = typeof window !== 'undefined'
 const DR_TOGGLE = '__DRTOGGLE'
 
 export default {
-    bind(element, binding, vnode) {
+    beforeMount(element, binding, vnode) {
         const targets = target(vnode, binding, { click: true }, ({ targets, vnode }) => {
             targets.forEach(target => eventbus.$emit(COLLAPSE_EVENTS.TOGGLE, target));
         });
@@ -35,7 +35,7 @@ export default {
             eventbus.$on(COLLAPSE_EVENTS.STATE, element[DR_TOGGLE])
         }
     },
-    unbind(element, binding, vnode) {
+    unmounted(element, binding, vnode) {
         if (!element[DR_TOGGLE]) {
             return
         }

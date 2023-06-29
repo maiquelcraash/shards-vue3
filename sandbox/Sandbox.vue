@@ -59,6 +59,18 @@ export default {
   <d-form-radio v-model="selected" value="kiwi">Kiwi</d-form-radio>
   <p>Selected Status: {{ selected }}</p>
 
+    <div>
+        <d-btn v-d-toggle.my-collapse variant="primary">Toggle Collapse</d-btn>
+        <d-collapse id="my-collapse">
+            <div class="p-3 mt-3 border rounded">
+                <h5>😍 Now you see me!</h5>
+                <span>In sagittis nibh non arcu viverra, nec imperdiet quam suscipit. Sed porta eleifend scelerisque. Vestibulum dapibus quis arcu a facilisis.</span>
+            </div>
+        </d-collapse>
+    </div>
+
+    <d-button v-d-tooltip="'👋 Hello there!'">Hover Me</d-button>
+
 </template>
 
 <style lang="css">

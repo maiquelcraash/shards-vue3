@@ -19,11 +19,11 @@ const bindTargets = (vnode, binding, listenTypes, callback) => {
 
     Object.keys(allListenTypes).forEach(type => {
         if (listenTypes[type] || binding.modifiers[type]) {
-            vnode.elm.addEventListener(type, listener)
-            const boundListeners = vnode.elm[BEL_KEY] || {}
+            vnode.el.addEventListener(type, listener)
+            const boundListeners = vnode.el[BEL_KEY] || {}
             boundListeners[type] = boundListeners[type] || []
             boundListeners[type].push(listener)
-            vnode.elm[BEL_KEY] = boundListeners
+            vnode.el[BEL_KEY] = boundListeners
         }
     })
 
@@ -33,10 +33,10 @@ const bindTargets = (vnode, binding, listenTypes, callback) => {
 const unbindTargets = (vnode, binding, listenTypes) => {
     Object.keys(allListenTypes).forEach(type => {
         if (listenTypes[type] || binding.modifiers[type]) {
-            const boundListeners = vnode.elm[BEL_KEY] && vnode.elm[BEL_KEY][type]
+            const boundListeners = vnode.el[BEL_KEY] && vnode.el[BEL_KEY][type]
             if (boundListeners) {
-                boundListeners.forEach(listener => vnode.elm.removeEventListener(type, listener))
-                delete vnode.elm[BEL_KEY][type]
+                boundListeners.forEach(listener => vnode.el.removeEventListener(type, listener))
+                delete vnode.el[BEL_KEY][type]
             }
         }
     })
