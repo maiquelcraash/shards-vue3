@@ -1,6 +1,6 @@
 <template>
     <component :is="computedTag" :id="computedID"
-        v-on-clickaway="away"
+        v-click-away="away"
         :class="[
             'dropdown',
             'd-dropdown',
@@ -416,9 +416,10 @@ export default {
         this._popperInstance = null
     },
     mounted() {
+        const instance = this;
         this.listenOnRoot(DROPDOWN_EVENTS.SHOWN, function(vm) {
-            if (vm !== this) {
-                this.visible = false
+            if (vm !== instance) {
+                instance.visible = false
             }
         })
 

@@ -11,7 +11,7 @@
             centered ? `modal-dialog-centered` : '',
         ]"
         role="document"
-        v-on-clickaway="away">
+        v-click-away="away">
         <div class="modal-content">
             <slot />
         </div>
