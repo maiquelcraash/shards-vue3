@@ -59,15 +59,19 @@ export default {
   <d-form-radio v-model="selected" value="kiwi">Kiwi</d-form-radio>
   <p>Selected Status: {{ selected }}</p>
 
-    <div>
-        <d-btn v-d-toggle.my-collapse variant="primary">Toggle Collapse</d-btn>
-        <d-collapse id="my-collapse">
-            <div class="p-3 mt-3 border rounded">
-                <h5>😍 Now you see me!</h5>
-                <span>In sagittis nibh non arcu viverra, nec imperdiet quam suscipit. Sed porta eleifend scelerisque. Vestibulum dapibus quis arcu a facilisis.</span>
-            </div>
-        </d-collapse>
-    </div>
+    <d-card>
+        <d-tabs card>
+            <d-tab title="Tab 1" active>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin efficitur eros tellus. Fusce mollis felis a lorem euismod sollicitudin. Maecenas et porttitor mauris.
+            </d-tab>
+            <d-tab title="Tab 2">
+                Sed at lacus efficitur, imperdiet purus et, pretium arcu. Mauris vulputate, libero in dignissim auctor, nunc tortor interdum elit, ac dignissim ex enim vitae diam.
+            </d-tab>
+            <d-tab title="Tab 3" disabled>
+                Sed at lacus efficitur, imperdiet purus et, pretium arcu. Mauris vulputate, libero in dignissim auctor, nunc tortor interdum elit, ac dignissim ex enim vitae diam.
+            </d-tab>
+        </d-tabs>
+    </d-card>
 
     <d-button v-d-tooltip="'👋 Hello there!'">Hover Me</d-button>
 

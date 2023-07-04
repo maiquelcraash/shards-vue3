@@ -13,8 +13,8 @@
                               :content="tab.headHtml || tab.title"
                               :href="tab.href"
                               :id="computedTabButtonID"
-                              :active="tab.localActiveState"
-                              :disabled="tab.disabled"
+                              :active="tab.isActive"
+                              :disabled="tab.isDisabled"
                               :setSize="tabs.length"
                               :posInSet="index + 1"
                               :controls="_tabsContainerID"
@@ -242,11 +242,11 @@ export default {
 
             this.tabs.forEach(_tab => {
                 if (_tab === tab) {
-                    _tab['localActiveState'] = true
+                    _tab.active();
                     return
                 }
 
-                _tab['localActiveState'] = false
+                _tab.inactive();
             })
 
             this.currentTab = index

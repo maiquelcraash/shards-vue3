@@ -1,30 +1,24 @@
 <template>
     <transition mode="out-in" name="fade"
-        @beforeEnter="handleBeforeEnter"
-        @afterEnter="handleAfterEnter"
-        @afterLeave="handleAfterLeave">
+                @beforeEnter="handleBeforeEnter"
+                @afterEnter="handleAfterEnter"
+                @afterLeave="handleAfterLeave">
         <component :is="tag"
-            ref="panel"
-            v-show="localActiveState"
-            role="tabpanel"
-            :id="computedID"
-            :aria-hidden="localActiveState ? 'false' : 'true'"
-            :aria-expanded="localActiveState ? 'true' : 'false'"
-            :aria-labelledby="controlledBy || null"
-            :class="[
-                'tab-pane',
-                ($parent && $parent.card && !noBody) ? 'card-body' : '',
-                show ? 'show' : '',
-                disabled ? 'disabled' : '',
-                localActiveState ? 'active' : ''
-            ]">
-            <slot />
+                   ref="panel"
+                   v-show="localActiveState"
+                   role="tabpanel"
+                   :id="computedID"
+                   :aria-hidden="localActiveState ? 'false' : 'true'"
+                   :aria-expanded="localActiveState ? 'true' : 'false'"
+                   :aria-labelledby="controlledBy || null"
+                   :class="classes">
+            <slot/>
         </component>
     </transition>
 </template>
 
 <script>
-import { guid } from '../../utils';
+import {guid} from '../../utils';
 
 export default {
     name: 'd-tab',
@@ -97,6 +91,21 @@ export default {
         },
         _isTab() {
             return true
+        },
+        classes() {
+            return [
+                'tab-pane',
+                (this.$parent && this.$parent.card && !this.noBody) ? 'card-body' : '',
+                this.show ? 'show' : '',
+                this.disabled ? 'disabled' : '',
+                this.localActiveState ? 'active' : ''
+            ]
+        },
+        isActive() {
+            return this.localActiveState;
+        },
+        isDisabled() {
+            return this.disabled;
         }
     },
     methods: {
@@ -108,6 +117,12 @@ export default {
         },
         handleAfterLeave() {
             this.show = false
+        },
+        active() {
+            this.localActiveState = true;
+        },
+        inactive() {
+            this.localActiveState = false;
         }
     },
     mounted() {
@@ -118,15 +133,15 @@ export default {
 
 <style scoped>
 .fade-enter-active {
-  transition: opacity .25s ease-in-out;
+    transition: opacity .25s ease-in-out;
 }
 
 .fade-leave-active {
-  transition: opacity .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    transition: opacity .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
 .fade-enter,
 .fade-leave-to {
-  opacity: 0;
+    opacity: 0;
 }
 </style>
