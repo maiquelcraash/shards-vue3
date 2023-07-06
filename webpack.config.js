@@ -64,21 +64,11 @@ export default {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.(sa|sc|c)ss$/,
                 use: [
-                    'vue-style-loader',
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.scss$/,
-                use: [
-                    'css-loader', 'sass-loader'
+                    'style-loader',
+                    'css-loader',
+                    'sass-loader'
                 ]
             },
         ]

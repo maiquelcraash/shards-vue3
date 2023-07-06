@@ -238,7 +238,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
     .custom-select {
         -webkit-appearance: none;
         -moz-appearance: none;

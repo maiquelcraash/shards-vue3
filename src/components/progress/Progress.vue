@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
     /* Hide labels for small progress bars */
     .progress-sm span {
         color: transparent;

@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .progress-bar {
     height: 100%;
 }

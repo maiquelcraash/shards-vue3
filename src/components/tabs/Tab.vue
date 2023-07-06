@@ -131,7 +131,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .fade-enter-active {
     transition: opacity .25s ease-in-out;
 }
@@ -140,7 +140,7 @@ export default {
     transition: opacity .25s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 
-.fade-enter,
+.fade-enter-from,
 .fade-leave-to {
     opacity: 0;
 }

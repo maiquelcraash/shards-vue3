@@ -145,7 +145,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .close {
     min-height: 100%;
     padding: 0.625rem 1.25rem 0.75rem 1.25rem;

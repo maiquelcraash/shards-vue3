@@ -436,7 +436,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .nav-link:hover {
     cursor: pointer;
 }

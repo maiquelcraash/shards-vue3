@@ -115,7 +115,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .nav-link.active {
     border-bottom: 1px solid transparent;
 }

@@ -290,7 +290,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .d-tabs-vertical-nav:hover {
     background: rgba(90, 97, 105, 0.06);
 }

@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .input-group input:focus {
     position: relative;
     z-index: 3;
