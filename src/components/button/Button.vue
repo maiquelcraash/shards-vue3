@@ -1,6 +1,5 @@
 <template>
     <button class="btn"
-        @click="handleClick"
         :class="[
             themeClass,
             sizeClass,
@@ -20,6 +19,7 @@ import { THEMECOLORS } from '../../utils/constants'
 
 export default {
     name: 'd-button',
+    emits: ['click'],           // emits default @click event
     props: {
         /**
          * The theme style.
@@ -91,16 +91,6 @@ export default {
 
         themeClass() {
             return this.theme ? `btn-${this.outline ? 'outline-' : ''}${this.theme}` : '';
-        }
-    },
-    methods: {
-        /**
-         * Triggered when the button is clicked.
-         *
-         * @event click
-         */
-        handleClick(e) {
-            this.$emit('click', e);
         }
     }
 }

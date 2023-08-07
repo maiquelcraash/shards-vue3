@@ -28,6 +28,7 @@ import eventbus from '../../utils/eventbus.js';
 
 export default {
     name: 'd-modal',
+    emits: ['close'],
     mixins: [clickAwayMixin],
     props: {
         /**
@@ -67,11 +68,11 @@ export default {
             default: false
         }
     },
+    expose: ['away'],
     methods: {
         away() {
-            if (this.noBackdrop) {
-                return;
-            }
+            if (this.noBackdrop) return;
+            if (!this.show) return;
 
             /**
              * @event close
@@ -93,7 +94,6 @@ export default {
 
 <style scoped lang="scss">
 .modal {
-    content: "ludixii";
     display: block;
     background-color: rgba(0, 0, 0, 0.5);
     transition: .3s;
