@@ -1,6 +1,6 @@
 <template>
     <button class="btn"
-        :class="[
+            :class="[
             themeClass,
             sizeClass,
             pill ? 'btn-pill' : '',
@@ -8,14 +8,15 @@
             blockLevel ? 'btn-block' : '',
             active ? 'active' : ''
         ]"
-        :disabled="this.disabled"
-        :aria-pressed="this.active">
+            :disabled="this.disabled"
+            :aria-pressed="this.active"
+            @click="handleClick">
         <slot>Button</slot>
     </button>
 </template>
 
 <script>
-import { THEMECOLORS } from '../../utils/constants'
+import {THEMECOLORS} from '../../utils/constants'
 
 export default {
     name: 'd-button',
@@ -91,6 +92,16 @@ export default {
 
         themeClass() {
             return this.theme ? `btn-${this.outline ? 'outline-' : ''}${this.theme}` : '';
+        }
+    },
+    methods: {
+        /**
+         * Triggered when the button is clicked.
+         *
+         * @event click
+         */
+        handleClick(e) {
+            this.$emit('click', e);
         }
     }
 }
