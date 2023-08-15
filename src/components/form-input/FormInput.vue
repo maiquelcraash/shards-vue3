@@ -28,7 +28,7 @@ import { INPUT_TYPES } from './../../utils/constants'
 
 export default {
     name: 'd-form-input',
-    emits: ['update:modelValue', 'change'],
+    emits: ['update:modelValue', 'change', 'input'],
     props: {
         /**
          * Input type.
@@ -167,6 +167,7 @@ export default {
         },
         onInput(e) {
             this.setValue(e.target.value)
+            this.$emit('input',  e.target.value)
         },
         onChange(e) {
             this.setValue(e.target.value)
