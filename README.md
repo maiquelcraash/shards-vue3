@@ -27,29 +27,24 @@ However this package contains a lot of improvements such as:
  - Updated packages and less vulnerabilities
  - Webpack build included
  - Bug fixes
+ - Smaller bundle size
 
 
-### Quick Start
+### Installation
 
-You can install Shards Vue 3 including the following dependency to your `package.json`
-
-```js
-"shards-vue3": "git+git@github.com:maiquelcraash/shards-vue3.git#master"
-```
-Then, just update your modules with
 ```bash
 // If using NPM
-npm install
+npm install --save shards-vue3
 
 // If using Yarn
-yarn
+yarn add shards-vue3
 ```
 
 <br />
 
 ### Module Bundlers
 
-If you are using a module bundler such as [Webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/), you can include the entire Shards Vue library inside your project.
+If you are using a module bundler such as [Webpack](https://webpack.js.org/), you can include the entire Shards Vue library inside your project.
 
 ```javascript
 import { createApp } from 'vue'
@@ -110,11 +105,6 @@ export default {
 }
 </script>
 ```
-
-<br />
-
-### Breaking Changes v2 to v3
- - `v-model` on child components https://v3-migration.vuejs.org/breaking-changes/v-model.html
 
 <br />
 
