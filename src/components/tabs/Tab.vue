@@ -106,6 +106,9 @@ export default {
         },
         isDisabled() {
             return this.disabled;
+        },
+        title() {
+            return this.title;
         }
     },
     methods: {

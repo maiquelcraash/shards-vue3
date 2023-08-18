@@ -10,14 +10,14 @@
                 :id="computedTabControlsID"
                 @keydown="handleOnKeynav">
                 <d-tab-button v-for="(tab, index) in tabs" :key="index"
-                              :content="tab.headHtml || tab.title"
+                              :content="tab.title"
                               :href="tab.href"
                               :id="computedTabButtonID"
                               :active="tab.isActive"
                               :disabled="tab.isDisabled"
                               :setSize="tabs.length"
                               :posInSet="index + 1"
-                              :controls="_tabsContainerID"
+                              :controls="tabsContainerID"
                               :linkClass="tab.titleLinkClass"
                               :itemClass="tab.titleItemClass"
                               @click="setTab(index)"/>
@@ -27,7 +27,7 @@
 
         <div ref="tabsContainer"
              :class="computedTabsContainerClasses"
-             :id="_tabsContainerID">
+             :id="tabsContainerID">
             <slot/>
         </div>
     </component>
@@ -52,7 +52,7 @@ export default {
             currentTab: this.modelValue,
             tabs: [],
             // eslint-disable-next-line
-            _tabsContainerID: null
+            tabsContainerID: null
         }
     },
     watch: {
@@ -62,7 +62,6 @@ export default {
             }
 
             this.$emit('update:modelValue', newVal)
-            this.tabs[newVal].$emit('click')
         },
         value(newVal, oldVal) {
             if (newVal === oldVal) {
@@ -192,7 +191,7 @@ export default {
         }
     },
     created() {
-        this._tabsContainerID = `tabs-container-${guid()}`
+        this.tabsContainerID = `tabs-container-${guid()}`
     },
     methods: {
         handleOnKeynav(e) {
@@ -252,8 +251,9 @@ export default {
             this.currentTab = index
         },
         updateTabs() {
-            this.tabs = Array.from(this.$refs.tabsContainer.querySelectorAll('.tab-pane')).map((tabEl) => {
-                return tabEl.__vnode.ctx.ctx
+            //                         tab-content / tab-pane / d-tab
+            this.tabs = this.$.subTree.children[1].children[0].children.map((dTab) => {
+                return dTab.component.ctx
             }).filter(child => child._isTab);
 
             let tabIndex = null
