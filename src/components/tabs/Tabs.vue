@@ -34,10 +34,10 @@
 </template>
 
 <script>
-import { guid } from '../../utils'
-import { KEYCODES } from '../../utils/constants'
+import {guid} from '../../utils'
+import {KEYCODES} from '../../utils/constants'
 import dTabButton from './_TabButton.vue'
-import { ref } from 'vue'
+import {ref} from 'vue'
 
 const childComponent = ref();
 
@@ -252,9 +252,12 @@ export default {
         },
         updateTabs() {
             //                         tab-content / tab-pane / d-tab
-            this.tabs = this.$.subTree.children[1].children[0].children.map((dTab) => {
-                return dTab.component.ctx
-            }).filter(child => child._isTab);
+            this.tabs = this.$.subTree.children[1].children[0].children
+                .filter(child => !!child.component)
+                .map((dTab) => {
+                    return dTab.component.ctx
+                })
+                .filter(child => child._isTab);
 
             let tabIndex = null
 

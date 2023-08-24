@@ -1,11 +1,11 @@
 {
   "name": "shards-vue3",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "description": "A free, beautiful and modern Vue.js 3 UI kit based on the Shards UI kit.",
   "main": "dist/shards-vue3.common.min.js",
   "web": "dist/shards-vue3.umd.min.js",
-  "module": "dist/shards-vue3.esm.min.js",
+  "module": "src/index.js",
   "type": "module",
   "jsnext:main": "dist/shards-vue3.esm.min.js",
   "scripts": {
