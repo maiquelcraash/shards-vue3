@@ -1,6 +1,8 @@
 {
   "name": "shards-vue3",
-  "version": "1.0.3",
+  "version": "1.0.4",
+  "repository": "https://github.com/maiquelcraash/shards-vue3",
+  "homepage": "https://github.com/maiquelcraash/shards-vue3",
   "license": "MIT",
   "description": "A free, beautiful and modern Vue.js 3 UI kit based on the Shards UI kit.",
   "main": "dist/shards-vue3.common.min.js",
