@@ -14,6 +14,9 @@
     "build": "webpack --config webpack.config.js",
     "sandbox": "vue-cli-service serve sandbox/src/main.js"
   },
+  "engines": {
+    "node": ">= 20.11 < 21"
+  },
   "keywords": [
     "Shards",
     "Shards UI Kit",
