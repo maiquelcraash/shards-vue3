@@ -2,11 +2,11 @@ import { VueLoaderPlugin } from 'vue-loader';
 import TerserPlugin from 'terser-webpack-plugin';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { default as packageJSON } from './package.json' assert { type: 'json' };
+import packageJSON from './package.json' with { type: 'json' };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const { name, dependencies, version } = packageJSON;
+const { dependencies } = packageJSON;
 
 const PATHS = {}
 PATHS.SRC = path.resolve(__dirname, 'src');

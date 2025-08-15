@@ -14,7 +14,8 @@ import './src/main.js'
 
 // You can import the component directly as SFC.
 import DFormRadio from '@/components/form-radio/FormRadio.vue';
-import Button from '../src/components/button/Button.vue'
+import Button from '@/components/button/Button.vue'
+import DDatepicker from "@/components/datepicker/Datepicker.vue";
 
 function handleClick() {
     window.alert('You clicked');
@@ -27,12 +28,20 @@ export default {
     data() {
         return {
             checked: false,
-            selected: 'orange'
+            selected: 'orange',
+            date: new Date(),
+            opened: false
         }
     },
     methods: {
         handleModalClose() {
             this.checked = false;
+        },
+        handleDateOpened() {
+            this.opened = true
+        },
+        handleDateClosed() {
+            this.opened = false
         }
     },
     watch: {
@@ -91,6 +100,16 @@ export default {
         <d-modal-body>This is a modal</d-modal-body>
         <d-button @click="handleModalClose" class="d-block mx-auto mb-2 px-4" ref="button" theme="primary">OK</d-button>
     </d-modal>
+
+    <div>
+        <div>Opened: <span :class="[opened ? 'text-success' : 'text-danger']">{{ opened }}</span></div>
+        <div>📅 Date: <span>{{ date }}</span></div>
+        <d-datepicker
+            v-model="date"
+            @opened="handleDateOpened"
+            @closed="handleDateClosed"
+            typeable/>
+    </div>
 
 </template>
 

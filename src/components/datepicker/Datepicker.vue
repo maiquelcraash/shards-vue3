@@ -1,6 +1,5 @@
 <template>
     <VueDatepicker
-        :value="value"
         :name="name"
         :id="id"
         :format="format"

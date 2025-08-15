@@ -87,9 +87,9 @@ function parseBindings(bindings) {
         config.trigger = 'focus'
     }
 
-    // If there's no trigger assigned, just delete the key.
+    // If there's no trigger assigned, apply default
     if (!config.trigger) {
-        delete config.trigger
+        config.trigger = 'hover'
     }
 
     return config
