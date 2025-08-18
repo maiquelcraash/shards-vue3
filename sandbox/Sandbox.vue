@@ -48,6 +48,17 @@ export default {
         checked(newVal, oldVal) {
             console.log('Checkbox changed to', newVal);
         },
+    },
+    computed: {
+        disabledDates() {
+            return {
+                dates: [
+                    new Date(new Date().getTime() - 24 * 60 * 60 * 1000)
+                ],
+                from: new Date(),
+                to: new Date(2025, 6, 10)
+            }
+        }
     }
 }
 </script>
@@ -108,7 +119,11 @@ export default {
             v-model="date"
             @opened="handleDateOpened"
             @closed="handleDateClosed"
-            typeable/>
+            :disabled-dates="disabledDates"
+            format="dd/MM/yyyy"
+            typeable
+            clearable
+            language="pt"/>
     </div>
 
 </template>
